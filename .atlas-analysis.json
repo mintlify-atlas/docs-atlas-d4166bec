@@ -1,0 +1,55 @@
+{
+  "projectType": "saas",
+  "projectName": "SoGaffer",
+  "projectDescription": "SoGaffer is a complementary tool that helps Sorare players build optimal fantasy football lineups by analyzing gameweek data and player performance.",
+  "theme": "mint",
+  "primaryColor": "#1A56DB",
+  "lightColor": "#EBF2FF",
+  "darkColor": "#0E2D6B",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction", "quickstart"]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/sorare-overview",
+              "concepts/lineup-optimization",
+              "concepts/gameweek-scoring"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/building-your-lineup",
+              "guides/analyzing-players",
+              "guides/gameweek-strategy"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "pages": ["faq"]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Optimal lineup builder for Sorare fantasy football",
+    "Gameweek alignment and formation analysis",
+    "Player performance analytics",
+    "Formation optimization for maximum points",
+    "Sorare card management assistance"
+  ],
+  "publicApiSurface": [
+    "Lineup optimization engine",
+    "Gameweek analysis",
+    "Player scoring projections",
+    "Formation recommendations"
+  ]
+}
