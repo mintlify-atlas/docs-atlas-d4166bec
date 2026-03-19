@@ -1,11 +1,11 @@
 ---
 title: "Quickstart"
-description: "Get your first optimized Sorare lineup in minutes using SoGaffer."
+description: "Get your first optimized Sorare lineup using SoGaffer."
 ---
 
-## Get up and running
+## Overview
 
-This guide walks you through creating a Sorare account, connecting SoGaffer, and submitting your first optimized lineup.
+SoGaffer is a complementary tool — you use it alongside your Sorare account to make better lineup decisions each gameweek. This guide walks you through the full process from account setup to submitting your first optimized lineup.
 
 <Steps>
   <Step title="Create a Sorare account">
@@ -16,111 +16,84 @@ This guide walks you through creating a Sorare account, connecting SoGaffer, and
     3. Verify your email and complete your profile.
 
     <Note>
-      Sorare requires identity verification before you can buy or trade cards. You can still explore the platform and receive free cards while verification is pending.
+      Sorare requires identity verification before you can buy or trade cards. You can still receive free Common cards and explore competitions while verification is pending.
     </Note>
   </Step>
 
   <Step title="Set up SoGaffer">
-    Clone the SoGaffer repository and install its dependencies.
+    Clone the SoGaffer repository from GitHub:
 
     ```bash
     git clone https://github.com/iglesiash/sogaffer.git
     cd sogaffer
-    npm install
     ```
 
+    Follow any setup instructions in the repository's README to install dependencies and configure the tool for your environment.
+
     <Tip>
-      SoGaffer requires Node.js 18 or later. Run `node --version` to confirm your version before installing.
+      Check the repository's README and any open issues on [GitHub](https://github.com/iglesiash/sogaffer) for the most up-to-date setup instructions as the project evolves.
     </Tip>
   </Step>
 
-  <Step title="Connect SoGaffer to your Sorare account">
-    SoGaffer reads your card collection and gameweek data through the Sorare GraphQL API.
+  <Step title="Gather your card collection information">
+    Before running SoGaffer, know which cards you have available to play this gameweek:
 
-    1. Copy the example environment file:
+    - Log in to [sorare.com](https://sorare.com) and open your **My Cards** section.
+    - Note the players, positions, and rarities of the cards you are willing to enter into a competition.
+    - Identify which cards are already locked into another competition and unavailable.
 
-       ```bash
-       cp .env.example .env
-       ```
-
-    2. Open `.env` in your editor and add your Sorare credentials:
-
-       ```bash .env
-       SORARE_EMAIL=you@example.com
-       SORARE_PASSWORD=your_password
-       ```
-
-    3. Save the file. SoGaffer uses these credentials to fetch your card collection and upcoming fixtures at runtime — they are never stored or transmitted elsewhere.
-
-    <Warning>
-      Never commit your `.env` file to version control. The repository's `.gitignore` excludes it by default.
-    </Warning>
+    <Note>
+      SoGaffer works with the card information you provide. Having an accurate view of your available collection before you start will produce better recommendations.
+    </Note>
   </Step>
 
-  <Step title="Fetch your card collection and gameweek data">
-    Run the sync command to pull your current card collection and the upcoming gameweek fixtures:
+  <Step title="Input your cards and run the optimizer">
+    With SoGaffer running, input your available player cards. The optimizer analyzes:
 
-    ```bash
-    npm run sync
-    ```
+    - Each player's recent form and score history
+    - Upcoming fixture difficulty for the current gameweek
+    - Whether any players have blank or double gameweeks
+    - The rarity bonus multiplier applied to each card
 
-    SoGaffer fetches:
-    - All cards in your Sorare collection
-    - Upcoming fixtures for the current gameweek
-    - Recent player performance scores
-
-    The sync typically takes 10–30 seconds depending on the size of your collection.
-  </Step>
-
-  <Step title="Generate your optimized lineup">
-    Run the optimizer to generate the best possible lineup for the upcoming gameweek:
-
-    ```bash
-    npm run optimize
-    ```
-
-    SoGaffer outputs a ranked lineup recommendation to your terminal, showing each suggested player, their projected score, and the reasoning behind their selection.
-
-    ```
-    Optimized lineup for Gameweek 42
-    ─────────────────────────────────
-    GK  M. Maignan       proj. 55.2
-    CB  V. van Dijk      proj. 61.8
-    CB  W. Saliba        proj. 58.4
-    CM  M. Fernandes     proj. 67.1
-    FW  E. Haaland       proj. 82.3
-    ─────────────────────────────────
-    Total projected score: 324.8
-    ```
+    SoGaffer then recommends the strongest five-player lineup from your available options.
 
     <Tip>
-      Run `npm run optimize -- --league all-star` to target a specific competition. See the [building your lineup guide](/guides/building-your-lineup) for all available options.
+      Run the optimizer at least 24–48 hours before the gameweek deadline so you have time to factor in late team news and injury updates.
     </Tip>
+  </Step>
+
+  <Step title="Review the recommendation">
+    SoGaffer's recommendation is a starting point, not a final answer. Before accepting it:
+
+    - Check that no recommended player has a blank gameweek (SoGaffer flags these automatically)
+    - Review the projected scores and the reasoning behind each selection
+    - Check for late injury news or rotation risk for any selected player
+    - Consider whether the competition you are entering calls for a safe (consistent) or ceiling (high-upside) lineup
+
+    See [Lineup optimization](/concepts/lineup-optimization) for a full explanation of how SoGaffer weighs these factors.
   </Step>
 
   <Step title="Submit your lineup on Sorare">
-    Once you have your recommendation, submit the lineup directly on Sorare:
+    Once you are satisfied with your five-player selection, submit it directly on Sorare:
 
     1. Log in to [sorare.com](https://sorare.com) and open the **Play** tab.
     2. Select the competition you are entering.
-    3. Click **+ Add player** for each position and choose the cards SoGaffer recommended.
-    4. Review your lineup, then click **Submit**.
+    3. Add the five players SoGaffer recommended, matching each to the correct positional slot.
+    4. Review your lineup, then click **Submit** before the gameweek deadline.
 
-    <Note>
-      Lineups must be submitted before the gameweek lock time shown on the competition page. SoGaffer displays this deadline in the optimizer output.
-    </Note>
+    <Warning>
+      SoGaffer does not submit lineups to Sorare on your behalf. You must enter your selections manually on the Sorare platform before the competition deadline.
+    </Warning>
   </Step>
 </Steps>
 
 ## Next steps
-
-You have submitted your first optimized lineup. Explore these resources to get more out of SoGaffer:
 
 <CardGroup cols={2}>
   <Card title="Sorare overview" icon="futbol" href="/concepts/sorare-overview">
     Understand how Sorare scoring, competitions, and card rarities work.
   </Card>
   <Card title="Building your lineup" icon="list-check" href="/guides/building-your-lineup">
-    Learn advanced lineup strategies and how to fine-tune SoGaffer's recommendations.
+    Learn advanced lineup strategies and how to interpret SoGaffer's recommendations.
   </Card>
 </CardGroup>
