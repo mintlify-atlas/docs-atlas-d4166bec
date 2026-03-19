@@ -1,0 +1,128 @@
+---
+title: Analyzing players
+description: How to use SoGaffer to evaluate individual player performance and make informed selection decisions.
+---
+
+SoGaffer surfaces several layers of player data to help you pick the right cards each gameweek. This guide explains how to read each analysis view and what to look for when comparing players at the same position.
+
+## Opening the player analysis panel
+
+From any lineup session, click a player's name or row to open the **Player analysis** panel. You can also search for any player directly from the **Players** tab — even players you do not own cards for, so you can assess the market before buying.
+
+<Tabs>
+  <Tab title="Form">
+    The **Form** view shows a player's scored points across their last five gameweeks. Use this view to:
+
+    - Identify players on a scoring run vs. players who have gone cold
+    - Spot one-off outlier scores that inflate a player's average (e.g., a hat-trick week)
+    - Compare consistency — a player averaging 45 points every week is often safer than one swinging between 20 and 80
+
+    SoGaffer highlights the trend direction with an upward (green) or downward (red) indicator next to the player's average. A flat line is neutral.
+
+    <Tip>
+      Five gameweeks is a short window. For newly promoted clubs or players returning from injury, weight recent matches more heavily than the full sample.
+    </Tip>
+  </Tab>
+
+  <Tab title="Fixtures">
+    The **Fixtures** view shows each player's upcoming matches for the next three gameweeks, colour-coded by difficulty:
+
+    | Colour | Meaning |
+    |---|---|
+    | Green | Favourable fixture (opponent ranked in the bottom third of the league) |
+    | Amber | Neutral fixture |
+    | Red | Difficult fixture (opponent ranked in the top third) |
+
+    This view also flags:
+    - **Double gameweeks (DGW):** Two fixtures in one gameweek — a major opportunity for double points
+    - **Blank gameweeks (BGW):** No fixture — the player scores zero
+
+    Plan two to three gameweeks ahead so you are not scrambling when a key player hits a blank.
+  </Tab>
+
+  <Tab title="Score history">
+    The **Score history** view shows a full rolling record of a player's Sorare scores, filterable by:
+
+    - Season (current vs. previous)
+    - Home vs. away matches
+    - Opponent strength
+
+    Use this view to answer questions like: does this striker score consistently at home but go quiet away? Does this goalkeeper earn clean sheet bonuses against mid-table opposition but concede regularly against top-six sides?
+
+    <Note>
+      Score history reflects real Sorare scores, which are based on the Sorare scoring algorithm applied to official match stats. Scores are not raw goals or assists — they include bonuses for decisive goals, clean sheets, and penalties.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Understanding the key metrics
+
+<AccordionGroup>
+  <Accordion title="Average score">
+    The player's mean Sorare score across their last five gameweeks (or fewer if they have played less). SoGaffer uses this as the base projection before applying fixture difficulty and rarity adjustments. A higher average does not always mean the right pick — check the upcoming fixture before committing.
+  </Accordion>
+
+  <Accordion title="Fixture difficulty rating (FDR)">
+    SoGaffer assigns each upcoming match a Fixture Difficulty Rating on a scale of 1 (easiest) to 5 (hardest). The FDR is calculated from the opponent's recent defensive and attacking record, home/away advantage, and league position. A player's projected score is adjusted up or down based on their FDR — a striker with an FDR-1 fixture gets a meaningful projection boost.
+  </Accordion>
+
+  <Accordion title="Projected score">
+    The projected score is SoGaffer's estimate of what a player will score this gameweek. It combines the player's average score with the FDR adjustment. For double gameweeks, SoGaffer sums projections across both fixtures. Treat projections as a guide, not a guarantee — football is inherently unpredictable.
+  </Accordion>
+
+  <Accordion title="Score ceiling and floor">
+    Alongside the projected score, SoGaffer shows a ceiling (optimistic estimate) and floor (pessimistic estimate) based on score variance. High-ceiling players are useful in the extra slot where you want upside. High-floor players are safer for the mandatory positional slots where a zero is costly.
+  </Accordion>
+
+  <Accordion title="Rarity bonus multiplier">
+    Each card rarity applies a score multiplier in Sorare competitions:
+
+    - **Common:** 1× (no bonus)
+    - **Limited:** 1.1×
+    - **Rare:** 1.2×
+    - **Super Rare:** 1.25×
+    - **Unique:** 1.3×
+
+    SoGaffer applies the correct multiplier automatically based on the card rarity you input. The effective projected score shown in the lineup builder already includes this bonus.
+  </Accordion>
+
+  <Accordion title="Minutes played indicator">
+    A player who regularly plays 90 minutes scores more opportunities than a substitute who comes on at 70 minutes. SoGaffer shows average minutes played per match so you can filter out rotation risks — especially important for teams with squad depth and managers who rotate regularly.
+  </Accordion>
+</AccordionGroup>
+
+## Comparing players for the same position
+
+To compare two or more players head-to-head, click **Compare** in the player analysis panel and search for the second player. SoGaffer displays both players' form, FDR, and projected scores side by side.
+
+When choosing between players at the same position, prioritise in this order:
+
+1. Does either player have a blank gameweek? Eliminate blanks first.
+2. Does either player have a double gameweek? A DGW player with decent form almost always wins.
+3. Compare FDR — a green fixture beats a red one even if the player's average is slightly lower.
+4. Compare form trend — prefer the player trending upward.
+5. Apply rarity bonus — if scores are close, the higher-rarity card edges ahead.
+
+## Identifying double gameweek players
+
+Double gameweeks are the single biggest edge in Sorare. In the **Fixtures** view, DGW players are marked with a **2x** badge. SoGaffer's projected score for DGW players covers both matches, so their numbers will appear significantly higher than single-fixture players.
+
+<Note>
+  Not all leagues align their gameweeks at the same time. A player in the Premier League may have a double while your La Liga player has a single. Always check the fixture view for each player individually rather than assuming gameweek schedules match across leagues.
+</Note>
+
+## When to bench a high-rarity card
+
+Benching a Rare or Super Rare card feels uncomfortable, but it is often the correct decision. Consider playing a lower-rarity card over a higher-rarity one when:
+
+- Your high-rarity card has a blank gameweek and the lower-rarity card has a double
+- Your high-rarity card faces an FDR-5 fixture and the lower-rarity card faces an FDR-1 fixture
+- Your high-rarity card's player is carrying an injury or has been dropping in minutes
+- The projected score difference (after rarity multiplier) still favours the lower-rarity option
+
+The rarity bonus is a multiplier on performance — it cannot overcome a zero from a blank or a low score against a dominant opponent.
+
+## Next steps
+
+- [Building your lineup](/guides/building-your-lineup) — apply your player analysis to build your final five
+- [Gameweek strategy](/guides/gameweek-strategy) — make strategic decisions around blanks, doubles, and rarity

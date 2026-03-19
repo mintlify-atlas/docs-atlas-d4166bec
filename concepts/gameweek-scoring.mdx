@@ -1,0 +1,88 @@
+---
+title: Gameweek scoring
+description: Understand how Sorare calculates player scores each gameweek and how to maximize your total lineup output.
+---
+
+Sorare scores each player based on their real-world match performance. Your total lineup score is the sum of all five players' scores, each adjusted by the card rarity multiplier. Understanding this scoring system helps you make smarter lineup decisions with SoGaffer.
+
+## Scoring breakdown
+
+Sorare's scoring model rewards attacking contributions, defensive solidity, and goalkeeping performance. The exact point values can vary slightly by Sorare version and competition, but the key actions and their general impact are:
+
+<AccordionGroup>
+  <Accordion title="Goals scored">
+    Goals are the highest-value action for outfield players. Forwards and midfielders receive more credit for goals than defenders. A goal directly boosts a player's decisive score component.
+  </Accordion>
+  <Accordion title="Assists">
+    An assist awards a meaningful bonus, though somewhat less than a goal. Creative midfielders and wide forwards who regularly contribute assists are reliable scoring sources.
+  </Accordion>
+  <Accordion title="Clean sheets">
+    Goalkeepers and defenders receive a significant bonus when their team keeps a clean sheet. This makes fixture difficulty especially important for defensive picks — an easy opponent increases the likelihood of a clean sheet bonus.
+  </Accordion>
+  <Accordion title="Saves (goalkeepers)">
+    Goalkeepers earn points per save. A goalkeeper facing a high-volume attacking side can post a strong score even without a clean sheet, provided they make several saves.
+  </Accordion>
+  <Accordion title="Base appearance score">
+    Every player who starts a match receives a base appearance score. Players who come on as substitutes receive a reduced version. Players who do not appear score zero for that match.
+  </Accordion>
+  <Accordion title="Negative actions">
+    Yellow cards, red cards, and own goals apply score penalties. A red card is particularly damaging and will significantly reduce a player's total score for that match.
+  </Accordion>
+  <Accordion title="Decisive score bonuses">
+    Sorare aggregates goals, assists, and other key contributions into a "decisive score" component. Players who are directly involved in match outcomes — scorers, assisters, penalty earners — receive a bonus that reflects their overall impact.
+  </Accordion>
+</AccordionGroup>
+
+## How card rarity multiplies your score
+
+Once a player's base score is calculated, Sorare applies a multiplier based on the rarity of the card you played:
+
+| Rarity | Multiplier effect |
+|---|---|
+| Common | No bonus |
+| Limited | Small multiplier |
+| Rare | Moderate multiplier |
+| Super Rare | Strong multiplier |
+| Unique | Maximum multiplier |
+
+<Info>
+  Exact multiplier values are set per competition. A competition for Rare cards and above will specify the bonus applied to each rarity tier. Always check the competition details before submitting your lineup.
+</Info>
+
+This means a Unique card for a player who scores 40 base points will outscore a Limited card for a player who scores 45 base points, once multipliers are applied. SoGaffer accounts for this when comparing your options.
+
+## Blank gameweeks and double gameweeks
+
+<Warning>
+  A player in a blank gameweek — meaning their club has no scheduled fixture — scores zero points for that gameweek. Including a blank player in your lineup wastes a slot and will cost you the competition.
+</Warning>
+
+Not all leagues play every week. Cup rounds, international breaks, and schedule imbalances create blank gameweeks for some players. Conversely, rescheduled matches can create double gameweeks where a player has two fixtures.
+
+**Blank gameweeks:**
+- Always check fixture availability before finalizing your lineup
+- SoGaffer automatically identifies and excludes blank players from its suggestions
+- If your card collection is thin at a position, you may need a Common card with a fixture over a higher-rarity card without one
+
+**Double gameweeks:**
+- A player with two fixtures has two opportunities to earn points
+- Their scores from both matches are combined
+- SoGaffer flags double-gameweek players and boosts their expected score accordingly — these players should almost always be prioritized
+
+## Captain and extra player mechanics
+
+Sorare's team structure includes an **extra** slot that accepts any outfield player (defender, midfielder, or forward). There is no traditional captain mechanic that doubles a score — instead, the value of the extra slot comes from the flexibility to stack a second strong outfield player at whichever position offers the best option in a given gameweek.
+
+<Tip>
+  Use the extra slot strategically. If you have two strong midfielders and one of them has a double gameweek, consider playing both a midfielder and the double-gameweek midfielder in the extra slot — provided you can still fill the other required positions.
+</Tip>
+
+## Tips for maximizing your score
+
+1. **Never play a blank.** A zero-point player is the single biggest score drain. Prioritize fixture coverage above all else.
+2. **Prioritize double-gameweek players.** Two matches means two base scores and two chances for goals, assists, and clean sheet bonuses.
+3. **Match rarity to form.** Play your highest-rarity cards on players in strong form with easy fixtures to maximize the multiplier value.
+4. **Don't ignore goalkeepers.** A goalkeeper facing a weak attack with a clean sheet chance can outscore an out-of-form forward.
+5. **Watch for red cards.** A player suspended for the next gameweek is effectively blank — check suspension lists before submitting.
+
+To see how SoGaffer weighs these factors when building your lineup, read [Lineup optimization](/concepts/lineup-optimization).

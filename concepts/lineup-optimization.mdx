@@ -1,0 +1,81 @@
+---
+title: Lineup optimization
+description: Learn how SoGaffer analyzes your card collection and gameweek data to suggest the strongest possible lineup.
+---
+
+Lineup optimization is the process of selecting the five players from your Sorare collection that are most likely to maximize your score in a given gameweek competition. SoGaffer does this by combining several data signals and applying them within Sorare's team structure constraints.
+
+## What optimization means in Sorare
+
+Because your lineup is locked in before matches kick off, optimization is forward-looking. You cannot react to injuries announced after kickoff or adjust to a surprise red card. The goal is to make the highest-expected-value selection given the information available at squad submission time.
+
+SoGaffer weighs multiple factors for every eligible player in your collection, then ranks possible five-player combinations that satisfy Sorare's positional requirements.
+
+## Optimization factors
+
+<AccordionGroup>
+  <Accordion title="Player form">
+    Recent performance is the strongest predictor of near-term output. SoGaffer looks at a player's Sorare scores over the last several gameweeks and weights more recent matches more heavily. A player on a hot streak scores higher on this factor than one who has been inconsistent or absent.
+  </Accordion>
+  <Accordion title="Fixture difficulty">
+    Playing a star striker against a bottom-half side is very different from playing them against a top defensive team. SoGaffer uses fixture difficulty ratings to adjust expected output up or down. A strong player with an easy fixture will often outrank a slightly better player with a difficult one.
+  </Accordion>
+  <Accordion title="Card rarity bonuses">
+    Your card's rarity multiplies the player's base Sorare score. SoGaffer factors this in when comparing options at the same position. In some cases, a slightly lower-form player on a higher-rarity card will outscore a better-form player on a lower-rarity card — especially in competitions that reward high multipliers.
+  </Accordion>
+  <Accordion title="Blank and double gameweeks">
+    A player with no fixture this gameweek contributes zero points and should almost never be selected. A player with two fixtures (a double gameweek) has double the scoring opportunity. SoGaffer automatically excludes blank players and boosts the expected score for double-gameweek players.
+  </Accordion>
+  <Accordion title="Positional constraints">
+    Sorare requires exactly one goalkeeper, one defender, one midfielder, one forward, and one extra (any outfield position). SoGaffer respects these constraints at all times. It never suggests a lineup that fails to meet the formation requirement, even if a positionally incorrect player would score higher.
+  </Accordion>
+</AccordionGroup>
+
+## Safe vs. ceiling lineups
+
+Not every competition calls for the same strategy. SoGaffer lets you choose between two optimization modes:
+
+<Tabs>
+  <Tab title="Safe lineup">
+    A safe lineup prioritizes **consistency** — players who regularly post solid Sorare scores regardless of opponent.
+
+    **When to use it:**
+    - In threshold competitions where finishing in the top X% matters more than winning outright
+    - When you need a reliable score to qualify for a prize tier
+    - Late in a season when you want to protect a ranking
+
+    **How SoGaffer builds it:**
+    SoGaffer weights form and fixture predictability more heavily. It favors players with low score variance over the past several gameweeks, even if their ceiling is modest. It avoids picks that are high-risk or dependent on a specific match outcome (e.g., a goalkeeper needing a clean sheet).
+  </Tab>
+  <Tab title="Ceiling lineup">
+    A ceiling lineup prioritizes **upside** — players who could post an exceptional score if things go their way.
+
+    **When to use it:**
+    - In winner-takes-all or top-3 competitions where you need to beat other managers
+    - When you're willing to accept more variance for a higher potential reward
+    - In single-entry high-stakes competitions
+
+    **How SoGaffer builds it:**
+    SoGaffer weights double-gameweek opportunities and high-multiplier cards more heavily. It is willing to include a player with a lower floor if their ceiling score (e.g., a striker likely to score multiple goals) is high enough to justify the risk.
+  </Tab>
+</Tabs>
+
+<Tip>
+  If you are entering multiple competitions simultaneously, consider using a safe lineup in threshold comps and a ceiling lineup in winner-takes-all comps.
+</Tip>
+
+## Positional constraints summary
+
+Every lineup SoGaffer generates satisfies the following hard requirements:
+
+| Position | Required count |
+|---|---|
+| Goalkeeper | 1 |
+| Defender | 1 |
+| Midfielder | 1 |
+| Forward | 1 |
+| Extra (any outfield) | 1 |
+
+The extra slot gives you flexibility — SoGaffer will fill it with whichever outfield position produces the highest expected contribution given your remaining card options.
+
+For a deeper understanding of how scores are calculated, see [Gameweek scoring](/concepts/gameweek-scoring).

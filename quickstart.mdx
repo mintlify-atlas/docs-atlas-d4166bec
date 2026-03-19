@@ -1,80 +1,126 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Get your first optimized Sorare lineup in minutes using SoGaffer."
 ---
 
-## Get started in three steps
+## Get up and running
 
-Get your documentation site running locally and make your first customization.
+This guide walks you through creating a Sorare account, connecting SoGaffer, and submitting your first optimized lineup.
 
-### Step 1: Set up your local environment
+<Steps>
+  <Step title="Create a Sorare account">
+    If you already have a Sorare account, skip to the next step.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    1. Go to [sorare.com](https://sorare.com) and click **Sign up**.
+    2. Enter your email address and choose a password.
+    3. Verify your email and complete your profile.
 
-### Step 2: Deploy your changes
+    <Note>
+      Sorare requires identity verification before you can buy or trade cards. You can still explore the platform and receive free cards while verification is pending.
+    </Note>
+  </Step>
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+  <Step title="Set up SoGaffer">
+    Clone the SoGaffer repository and install its dependencies.
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    ```bash
+    git clone https://github.com/iglesiash/sogaffer.git
+    cd sogaffer
+    npm install
+    ```
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+    <Tip>
+      SoGaffer requires Node.js 18 or later. Run `node --version` to confirm your version before installing.
+    </Tip>
+  </Step>
 
-### Step 3: Go live
+  <Step title="Connect SoGaffer to your Sorare account">
+    SoGaffer reads your card collection and gameweek data through the Sorare GraphQL API.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    1. Copy the example environment file:
+
+       ```bash
+       cp .env.example .env
+       ```
+
+    2. Open `.env` in your editor and add your Sorare credentials:
+
+       ```bash .env
+       SORARE_EMAIL=you@example.com
+       SORARE_PASSWORD=your_password
+       ```
+
+    3. Save the file. SoGaffer uses these credentials to fetch your card collection and upcoming fixtures at runtime — they are never stored or transmitted elsewhere.
+
+    <Warning>
+      Never commit your `.env` file to version control. The repository's `.gitignore` excludes it by default.
+    </Warning>
+  </Step>
+
+  <Step title="Fetch your card collection and gameweek data">
+    Run the sync command to pull your current card collection and the upcoming gameweek fixtures:
+
+    ```bash
+    npm run sync
+    ```
+
+    SoGaffer fetches:
+    - All cards in your Sorare collection
+    - Upcoming fixtures for the current gameweek
+    - Recent player performance scores
+
+    The sync typically takes 10–30 seconds depending on the size of your collection.
+  </Step>
+
+  <Step title="Generate your optimized lineup">
+    Run the optimizer to generate the best possible lineup for the upcoming gameweek:
+
+    ```bash
+    npm run optimize
+    ```
+
+    SoGaffer outputs a ranked lineup recommendation to your terminal, showing each suggested player, their projected score, and the reasoning behind their selection.
+
+    ```
+    Optimized lineup for Gameweek 42
+    ─────────────────────────────────
+    GK  M. Maignan       proj. 55.2
+    CB  V. van Dijk      proj. 61.8
+    CB  W. Saliba        proj. 58.4
+    CM  M. Fernandes     proj. 67.1
+    FW  E. Haaland       proj. 82.3
+    ─────────────────────────────────
+    Total projected score: 324.8
+    ```
+
+    <Tip>
+      Run `npm run optimize -- --league all-star` to target a specific competition. See the [building your lineup guide](/guides/building-your-lineup) for all available options.
+    </Tip>
+  </Step>
+
+  <Step title="Submit your lineup on Sorare">
+    Once you have your recommendation, submit the lineup directly on Sorare:
+
+    1. Log in to [sorare.com](https://sorare.com) and open the **Play** tab.
+    2. Select the competition you are entering.
+    3. Click **+ Add player** for each position and choose the cards SoGaffer recommended.
+    4. Review your lineup, then click **Submit**.
+
+    <Note>
+      Lineups must be submitted before the gameweek lock time shown on the competition page. SoGaffer displays this deadline in the optimizer output.
+    </Note>
+  </Step>
+</Steps>
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
+You have submitted your first optimized lineup. Explore these resources to get more out of SoGaffer:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Sorare overview" icon="futbol" href="/concepts/sorare-overview">
+    Understand how Sorare scoring, competitions, and card rarities work.
+  </Card>
+  <Card title="Building your lineup" icon="list-check" href="/guides/building-your-lineup">
+    Learn advanced lineup strategies and how to fine-tune SoGaffer's recommendations.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>
